@@ -1,0 +1,253 @@
+﻿Version=6.3
+NumberOfModules=1
+Module1=Starter
+Build1=Default,com.htetznaing.ddayunlimitedhacked
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~'AdMob~\n~AddApplicationText(~\n~<meta-data android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version"/>~\n~<activity android:name="com.google.android.gms.ads.AdActivity"~\n~  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>~\n~)~\n~'End of AdMob
+IconFile=
+NumberOfFiles=4
+File1=d-day_3.0.4.apk
+File2=icon.png
+File3=share.png
+File4=Tutorial.MP4
+NumberOfLibraries=9
+Library1=core
+Library2=phone
+Library3=animationplus
+Library4=icosslideanimation
+Library5=id
+Library6=xmllayoutbuilder
+Library7=mwadmobinterstitial2 (2)
+Library8=admob
+Library9=clipboard
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: D Day Unlimited Hacked
+	#VersionCode: 1
+	#VersionName: 1.0
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+	#AdditionalRes: D:\Android\android-sdk\extras\google\google-play-services\libproject\google-play-services_lib\res, com.google.android.gms
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+		Dim Theme_Value As Int
+		Dim t As Timer
+End Sub
+
+Sub Globals
+	Dim b1,b2,b3 As Button
+	Dim lb,lb1,lBar As Label
+	Dim ani As ICOSSlideAnimation
+	Dim ani1 As AnimationPlus
+			Dim res As XmlLayoutBuilder
+			Dim lis As List
+	Dim idd As id
+	Dim idd_int As Int
+		Dim Banner As AdView
+	Dim Interstitial As mwAdmobInterstitial
+	Dim p As Phone
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+		p.SetScreenOrientation(1)
+	If p.SdkVersion > 19 Then
+	Banner.Initialize("Banner","ca-app-pub-4173348573252986/9809481351")
+	Banner.LoadAd
+	Activity.AddView(Banner,0%x,90%y,100%x,10%y)
+	
+	Interstitial.Initialize("Interstitial","ca-app-pub-4173348573252986/2286214551")
+	Interstitial.LoadAd
+	End If
+	t.Initialize("t",15000)
+	t.Enabled = True
+	
+	lb1.Initialize("lb1")
+	lb1.Text = "WARNING!!!"
+	lb1.TextSize = 30
+	lb1.TextColor = Colors.Red
+	lb1.Gravity = Gravity.CENTER
+	
+	lBar.Initialize("lBar")
+	lBar.Color = Colors.Yellow
+	
+	lb.Initialize("lb")
+	lb.Text = "Firstly! Click 'Tutorial' button and" & CRLF & "View How to Use!!!"
+	lb.TextColor = Colors.White
+	lb.Gravity = Gravity.CENTER
+	
+	b1.Initialize("b1")
+	b1.Text = "Tutorial"
+	
+	b2.Initialize("b2")
+	b2.Text = "Install"
+	
+	b3.Initialize("b3")
+	b3.Text = "Hacked Game Data Files"
+
+Activity.AddView(lb1,10%x,5%y,80%x,10%y)
+Activity.AddView(lb,10%x,(lb1.Top+lb1.Height)+2%y,80%x,10%y)
+Activity.AddView(lBar,5%x,(lb1.Top+lb1.Height),90%x,1%y)
+Activity.AddView(b1,20%x,(lb.Top+lb.Height)+5%y,60%x,10%y)
+Activity.AddView(b2,20%x,(b1.Top+b1.Height)+2%y,60%x,10%y)
+Activity.AddView(b3,20%x,(b2.Top+b2.Height)+2%y,60%x,10%y)
+
+ani.SlideFadeFromLeft("ani",600,2000)
+ani.StartAnim(lb1)
+ani.SlideFadeFromRight("ani",600,2000)
+ani.StartAnim(lb)
+
+	Activity.AddMenuItem("Stop Showing Ads!","rad")
+Activity.AddMenuItem("Change Theme","ct")
+Activity.AddMenuItem3("Share This App","share",LoadBitmap(File.DirAssets,"share.png"),True)
+	
+End Sub
+
+Sub b1_Click
+	ani1.InitializeScaleCenter("btn",1.35,1.35,0,0,lb1)
+	ani1.Duration = 1500
+	ani1.Start(lb1)
+	If File.Exists(File.DirRootExternal,"Tutorial.mp4") = True Then
+	Dim pv As PhoneIntents
+	StartActivity(pv.PlayVideo(File.DirRootExternal,"Tutorial.mp4"))
+	Else
+		File.Copy(File.DirAssets,"Tutorial.MP4",File.DirRootExternal,"Tutorial.mp4")
+		Dim pv As PhoneIntents
+	StartActivity(pv.PlayVideo(File.DirRootExternal,"Tutorial.mp4"))
+	End If
+End Sub
+
+Sub btn_AnimationEnd
+ani1.InitializeScaleCenter("btn",1.35,1.35,0,0,lb1)
+	ani1.Duration = 1500
+	ani1.Start(lb1)
+End Sub
+
+Sub b2_Click
+		ani1.InitializeScaleCenter("btn",1.35,1.35,0,0,lb1)
+	ani1.Duration = 1500
+	ani1.Start(lb1)
+	
+File.Copy(File.DirAssets,"D-Day_3.0.4.apk",File.DirRootExternal,"D_Day_3.0.4.apk")
+Msgbox("1. Click 'OK' Below to Install App!" & CRLF & "2. After Install Finished!" & CRLF& "Do not click 'Open' button" & CRLF & "Click 'Done' button to come back here and" & CRLF & "click 'Hacked Game Data Files' button below!","WARNING!")
+Dim i As Intent
+i.Initialize(i.ACTION_VIEW,"file:///"&File.DirRootExternal&"/D_Day_3.0.4.apk")
+i.SetType("application/vnd.android.package-archive")
+StartActivity(i)
+End Sub
+
+Sub b3_Click
+	Msgbox("Firstly! Turn On Your internet!","Need Internet Connection!")
+			Dim a As Int
+		a = 	Msgbox2("You NEED Download HACKED Unlimted OBB File. Click 'Download' button below to Start Download File and after you will get D-Day Unlimited Hacked","Attention!","Download","","Cancel",Null)
+			If a = DialogResponse.POSITIVE Then
+				Dim p1 As PhoneIntents
+	StartActivity(p1.OpenBrowser("https://github.com/MgHtetzNaing/DDay/releases/download/v1.0/dday.obb"))
+			End If
+End Sub
+
+Sub share_Click
+Dim ShareIt As Intent
+Dim copy As BClipboard
+copy.clrText
+copy.setText("#DDay_Unlimited_Hacked! Frontline Commando D-DAY Hack Unlimited Gold, Cash and Health for all Android devices. It Is important that our hacked game don’t require To have root. Frontline Commando D-DAY Hack has been tested on several Android devices without any problems.")
+    ShareIt.Initialize (ShareIt.ACTION_SEND,"")
+    ShareIt.SetType ("text/plain")
+    ShareIt.PutExtra ("android.intent.extra.TEXT",copy.getText)
+    ShareIt.PutExtra ("android.intent.extra.SUBJECT","#DDay_Unlimited_Hacked_App!")
+    ShareIt.WrapAsIntentChooser("Share App Via...")
+StartActivity (ShareIt)
+End Sub
+
+Sub ct_Click
+	lis.Initialize
+	lis.AddAll(Array As String("Holo","Holo Light","Holo Light Dark","Old Android","Material","Material Light","Material Light Dark","Transparent","Transparent No Title Bar"))
+	idd_int = idd.InputList1(lis,"Choose Themes!")
+	If idd_int = 0 Then
+		SetTheme(res.GetResourceId("style", "android:style/Theme.Holo"))
+	End If
+	
+	If idd_int = 1 Then
+		SetTheme(res.GetResourceId("style", "android:style/Theme.Holo.Light"))
+	End If
+	
+	If idd_int = 2 Then
+		SetTheme(res.GetResourceId("style", "android:style/Theme.Holo.Light.DarkActionBar"))
+	End If
+	
+	If idd_int = 3 Then
+		SetTheme(16973829)
+	End If
+	
+	If idd_int = 4 Then
+		SetTheme(res.GetResourceId("style", "android:style/Theme.Material"))
+	End If
+	
+	If idd_int = 5 Then
+		SetTheme(res.GetResourceId("style", "android:style/Theme.Material.Light"))
+	End If
+	
+	If idd_int = 6 Then
+		SetTheme(res.GetResourceId("style", "android:style/Theme.Material.Light.DarkActionBar"))
+	End If
+	
+If idd_int = 7 Then
+	SetTheme(res.GetResourceId("style", "android:style/Theme.Translucent"))
+End If
+
+If idd_int = 8 Then
+	SetTheme(res.GetResourceId("style", "android:style/Theme.Translucent.NoTitleBar"))
+End If
+
+End Sub
+
+Private Sub SetTheme (Theme As Int)
+	If Theme = 0 Then
+		ToastMessageShow("Theme not available.", False)
+		Return
+	End If
+	If Theme = Theme_Value Then Return
+	Theme_Value = Theme		
+	Activity.Finish
+	StartActivity(Me)		
+End Sub
+
+
+#if java
+public void _onCreate() {
+	if (_theme_value != 0)
+		setTheme(_theme_value);
+}
+#end if
+
+Sub rad_Click
+	t.Enabled = False
+End Sub
+
+Sub t_Tick
+	If p.SdkVersion > 19 Then
+	If Interstitial.Status=Interstitial.Status_AdReadyToShow Then
+	Interstitial.Show
+	End If
+	
+	If Interstitial.Status=Interstitial.Status_Dismissed Then
+	Interstitial.LoadAd
+	End If
+	Else
+		End If
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
